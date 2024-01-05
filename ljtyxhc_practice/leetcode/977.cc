@@ -5,24 +5,23 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {     
-        auto begin = nums.begin();
-        auto end = nums.end() - 1;
-        vector<int> ans;
-        while (begin != end)
+        int size = nums.size() - 1;
+        vector<int> ans(nums.size());
+        int left = 0, right = size;
+        for (int n = 0; n <= size; n++)
         {
-            if((*begin)*(*begin) < (*end)*(*end))
+            if(nums[left] * nums[left] < nums[right] * nums[right])
             {
-                ans.push_back((*end)*(*end));
-                end--;
+                ans[size - n] = nums[right] * nums[right];
+                right--;
             }
             else
             {
-                ans.push_back((*begin)*(*begin));
-                begin++;
+                ans[size - n] = nums[left] * nums[left];
+                left++;
             }
         }
-        ans.push_back((*begin)*(*begin));
-        reverse(ans.begin(), ans.end());
+        
         return ans;
     }
 };
